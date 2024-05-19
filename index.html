@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <form id="form">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="msg">Mensagem:</label>
+      <textarea id="msg" name="msg" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div id="mensagem-enviada" class="msg"m>
+      <span id="mensagem-digitada"></span>
+      
+    </div>
+  </div>
+
+  <script>
+
+    document.getElementById('form').addEventListener('submit', function (event) {
+      event.preventDefault(); 
+      const data = {
+        nome: document.getElementById('nome').value,
+        email: document.getElementById('email').value,
+        msg: document.getElementById('msg').value
+      };
+      fetch('http://localhost:8080/submit',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Suscesso:', data);
+      })
+      .catch((error) => {
+        console.error('Erro:', error);
+      });
+      var mensagemDigitada = document.getElementById('msg').value;
+      var mensagemEnviada = document.getElementById('mensagem-enviada');
+      var spanMensagemDigitada = document.getElementById('mensagem-digitada');
+      spanMensagemDigitada.textContent = mensagemDigitada;
+      mensagemEnviada.style.display = 'block';
+    });
+
+
+  </script>
+</body>
+
+</html>
