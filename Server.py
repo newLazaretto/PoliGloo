@@ -42,11 +42,13 @@ def handle_request(client_socket):
                 try:
                     body_data = json.loads(body)
                 except json.JSONDecodeError:
-                    return 'HTTP/1.1 400 Bad Request\r\n\r\nInvalid JSON'
+                    response = 'HTTP/1.1 400 Bad Request\r\n\r\nInvalid JSON'
+                    client_socket.sendall(response.encode())
+                    return
             #Inserir dados no BD
                 try:
                     # Tenta se conectar ao banco de dados
-                    conn_string = "host='localhost' dbname='postest' user='postgres'  password='6792010'"
+                    conn_string = "host='192.168.0.5' dbname='postest' user='postgres'  password='6792010'"
                     conn = psycopg2.connect(conn_string)
         
                     # Se a conexão for bem-sucedida, imprime uma mensagem de sucesso
@@ -56,6 +58,9 @@ def handle_request(client_socket):
                 except Exception as e:
                     # Se ocorrer um erro ao conectar, imprime a mensagem de erro
                     print("Erro ao conectar ao banco de dados:", e)
+                    response = 'HTTP/1.1 500 Internal Server Error\r\n\r\nDatabase connection failed'
+                    client_socket.sendall(response.encode())
+                    return
                 cursor = conn.cursor()
                 cursor.execute("INSERT INTO post (nome, email, msg) VALUES (%s, %s, %s)", (body_data['nome'], body_data['email'], body_data['msg']))
                 conn.commit()
@@ -80,7 +85,7 @@ def handle_request(client_socket):
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('localhost', 8080))
+    server_socket.bind(('0.0.0.0', 8080))
     server_socket.listen()
     print('Server listening on port 8080...')
 

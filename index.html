@@ -38,7 +38,7 @@
         email: document.getElementById('email').value,
         msg: document.getElementById('msg').value
       };
-      fetch('http://localhost:8080/submit',{
+      fetch('http://192.168.0.5:8080/submit',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
