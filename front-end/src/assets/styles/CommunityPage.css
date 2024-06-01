@@ -1,0 +1,96 @@
+.community-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .back-button {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .back-button svg {
+    margin-right: 5px;
+  }
+  
+  .community-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .community-header img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .community-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .community-content {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .community-content p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .post-list {
+    margin-top: 20px;
+  }
+  
+  .post {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    }  
+    /* ... existing styles for .community-page, .back-button, etc. (unchanged) */
+
+.community-sections {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.community-sections ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.community-sections li {
+  margin-right: 10px;
+}
+
+.community-sections a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.community-sections a:hover {
+  background-color: #eee;
+}
