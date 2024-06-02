@@ -12,6 +12,7 @@ const MainContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [section, setSection] = useState('');
+  const isRootRoute = location.pathname === '/';
 
   useEffect(() => {
     // Redirect to login if not authenticated and not on the register page
@@ -46,7 +47,7 @@ const MainContent = () => {
     <div className="App">
       {isAuthenticated ? (
         <>
-          <Navbar toggleSection={toggleSection} />
+          {isRootRoute && <Navbar toggleSection={toggleSection} />}
           <Routes>
             <Route path="/" element={
               section === 'explore' ? <Explore /> :
