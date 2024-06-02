@@ -1,0 +1,185 @@
+/* src/components/LoginPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+
+body.login-page {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F4F6F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-page .form-container {
+    background: #FAFAFC;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 2pt solid #E6E6E8;
+    width: 651.5294px;
+    height: 331.8996;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.login-page form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-page form img {
+    width: 300.0959px;
+    height: 35.2309;
+}
+
+.login-page label {
+    margin-bottom: 0.5rem;
+}
+
+.login-page input {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 1.67px solid #939DCE;
+    border-radius: 10px;
+    margin-bottom: 1rem; 
+    background-color: #F4F6F9;
+    font-size: 14.99pt;
+    width: 90%;
+    color: #878787;
+}
+
+.login-page input::placeholder {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14.99pt;
+    color: #878787;
+}
+
+.login-page button {
+    font-family: 'Fredoka';
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;;
+    background-color: #2e74e5;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 19pt;
+    width: 94%;
+}
+
+.login-page button:hover {
+    background-color: #1A5EB8;
+}
+
+
+
+.login-page .register-link-container {
+    font-family: 'Poppins', sans-serif;
+    margin-top: 45px;
+    background: #FAFAFC;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2pt solid #E6E6E8;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.login-page .register-link {
+    font-size: 19pt;
+    color: #0B0B54;
+    text-align: center;
+}
+
+.login-page .register-link a {
+    font-size: 19pt;
+    font-weight: 600;
+    color: #2E74E5;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.login-page .loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page .loading-overlay img {
+  width: 300px; 
+  height: auto;
+}
+
+.login-page .loading-overlay p {
+  display: inline-block;
+  margin: 0; 
+  margin-top: 10px;
+  font-size: 35pt;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #939DCE
+  
+}
+
+
+@keyframes pulse {
+    0%, 20%, 100% {
+      transform: scale(1);
+    }
+    10% {
+      transform: scale(1.5);
+    }
+  }
+
+.login-page .loading-overlay d {
+    display: inline-block;
+    margin-right: 30px; 
+    margin-top: 0px;
+    font-size: 35pt;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #939DCE
+  } 
+
+  .login-page  .loading-overlay .dots {
+    position:absolute;
+    font-size: 36px;
+    margin-left: 4px;
+    display: inline-block;
+  }
+  
+  .login-page  .loading-overlay .dots:nth-child(1) {
+    animation: pulse 1.5s infinite; 
+  }
+  
+  .login-page  .loading-overlay .dots:nth-child(2) {
+    margin-left: 18px;
+    animation: pulse 1.5s infinite 0.5s; 
+  }
+  
+  .login-page  .loading-overlay .dots:nth-child(3) {
+    margin-left: 32px;
+    animation: pulse 1.5s infinite 1s; 
+  }
+  
