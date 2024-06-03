@@ -11,7 +11,6 @@
   width: 65%;
   background-color: transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 0;
 }
 
 .header {
@@ -86,7 +85,6 @@
   font-family: 'Fredoka';
   font-weight: 700;
   color: #939dce;
-  z-index: 2; 
 }
 
 
