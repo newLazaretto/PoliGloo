@@ -2,16 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
 .communities {
-  margin-top: -18.5%;
+  margin-top: -405px;
   background-image: url('../images/brick-wall.png');
   border: 1px solid #939DCE;;
-  padding: 19.7px;
-  width: 63.8%;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+  padding-top: 9%;
+  padding-left: 9%;
+  width: 65%;
   background-color: transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  margin-left: 5%;
   
+  margin-left: 5%;
   
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Routes, Route } from 'react-router-dom';
 import '../assets/styles/CommunityPage.css';
+import CommunityData from './CommunityData';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const CommunityPage = () => {
   const [newArquivoName, setNewArquivoName] = useState('');
   const [newArquivoUrl, setNewArquivoUrl] = useState('');
 
+  /*
   useEffect(() => {
     fetch(`/${communityId}`)
       .then(response => response.json())
@@ -25,6 +27,26 @@ const CommunityPage = () => {
         setArquivos(data.arquivos || []);
       })
       .catch(error => console.error('Error fetching community:', error));
+  }, [communityId]);
+*/
+  /*
+  useEffect(() => {
+      const selectedCommunity = communityData.find((community) => community.id === communityId);
+      setCommunity(selectedCommunity);
+      // Simulação de fetch de posts
+      if (selectedCommunity) {
+        setPosts(selectedCommunity.posts || []);
+      }
+    }, [communityId]);
+  */
+  useEffect(() => {
+    const selectedCommunity = CommunityData[communityId];
+    if (selectedCommunity) {
+      setCommunity(selectedCommunity);
+      setPosts(selectedCommunity.posts || []);
+      setAvisos(selectedCommunity.avisos || []);
+      setArquivos(selectedCommunity.arquivos || []);
+    }
   }, [communityId]);
 
   const handleNewPostSubmit = (e) => {
@@ -83,7 +105,7 @@ const CommunityPage = () => {
 
     // Envie a requisição para criar o arquivo no backend, se necessário
   };
-  
+
 
   if (!community) {
     return <div>Carregando...</div>;
@@ -101,9 +123,10 @@ const CommunityPage = () => {
           onClick={() => navigate('/')}
         />
         <div className="community-buttons">
-          <button onClick={() => navigate(`/${community.id}/Avisos`)}>Avisos</button>
-          <button onClick={() => navigate(`/${community.id}/Geral`)}>Geral</button>
-          <button onClick={() => navigate(`/${community.id}/Arquivos`)}>Arquivos</button>
+          <button onClick={() => navigate(`/${communityId}/Avisos`)}>Avisos</button>
+          <button onClick={() => navigate(`/${communityId}/Geral`)}>Geral</button>
+          <button onClick={() => navigate(`/${communityId}/Arquivos`)}>Arquivos</button>
+
         </div>
         <img
           src="/assets/images/perfil.png"
@@ -114,7 +137,7 @@ const CommunityPage = () => {
       </div>
       <div className="sidebar">
         <div className="community-info">
-          <img src={image} alt={name} className="community-image" />
+          <img src={image} alt={''} className="community-image" />
           <h2 className="community-name">{name}</h2>
           <p className="community-members">{members.length} membros</p>
         </div>
@@ -128,7 +151,7 @@ const CommunityPage = () => {
         </div>
       </div>
       <div className="main-content">
-      <Routes>
+        <Routes>
           <Route path="/:communityId/Avisos" element={<Avisos avisos={avisos} onNewAvisoSubmit={handleNewAvisoSubmit} newAvisoTitle={newAvisoTitle} setNewAvisoTitle={setNewAvisoTitle} newAvisoContent={newAvisoContent} setNewAvisoContent={setNewAvisoContent} />} />
           <Route path="/:communityId/Geral" element={<Geral posts={posts} onNewPostSubmit={handleNewPostSubmit} newPost={newPost} setNewPost={setNewPost} />} />
           <Route path="/:communityId/Arquivos" element={<Arquivos arquivos={arquivos} onNewArquivoSubmit={handleNewArquivoSubmit} newArquivoName={newArquivoName} setNewArquivoName={setNewArquivoName} newArquivoUrl={newArquivoUrl} setNewArquivoUrl={setNewArquivoUrl} />} />
