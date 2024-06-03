@@ -10,8 +10,13 @@ function Navbar({ toggleSection }) {
   const [isBackgroundVisible, setBackgroundVisible] = useState(true);
 
   const handleButtonClick = (section) => {
-    setImageVisible(false);
-    setBackgroundVisible(false);
+    if (section === 'user') {
+      setImageVisible(true);
+      setBackgroundVisible(true);
+    } else {
+      setImageVisible(false);
+      setBackgroundVisible(false);
+    }
     toggleSection(section);
   };
 
