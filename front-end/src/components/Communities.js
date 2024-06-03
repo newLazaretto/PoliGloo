@@ -37,11 +37,11 @@ const Communities = () => {
       <ul>
         {communityData.map((community) => (
           <li key={community.id}>
-            <button onClick={() => handleCommunityClick(community)}>
+            <button className="communities-button" onClick={() => handleCommunityClick(community)}>
               <img src={community.image} alt={''}></img>
               {community.name} ({community.members})
             </button>
-              <button onClick={() => handleJoinCommunity(community.id)}>
+              <button className="join-communities-button"onClick={() => handleJoinCommunity(community.id)}>
                 {joinedCommunities.includes(community.id)
                   ? <FaSquareCheck />
                   : <FaPlusSquare onClick={() => handleJoinCommunity(community.id)} />}
@@ -54,3 +54,4 @@ const Communities = () => {
 };
 
 export default Communities;
+
