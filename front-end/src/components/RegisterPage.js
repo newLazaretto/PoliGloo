@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../assets/styles/RegisterPage.css';
 import logo from '../assets/images/Logo-horizontal-sem-simbolo.png';
 import loadingLogo from '../assets/images/Logo-Vertical.png';
+import '../assets/styles/Loading.css';
 
 const RegisterPage = ({ onRegister }) => {
   const [registration, setRegistration] = useState('');

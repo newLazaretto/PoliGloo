@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/styles/LoginPage.css';
+import '../assets/styles/Loading.css';
 import logo from '../assets/images/Logo-horizontal-sem-simbolo.png';
 import loadingLogo from '../assets/images/Logo-Vertical.png';
 

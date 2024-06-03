@@ -8,12 +8,13 @@
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #939DCE;
+    z-index: 3;
     
 }
 
 .nav-back-button-container {
     
-    padding-right: 10%;
+    padding-right: 6.5%;
     padding-left: 2%;
     position: absolute;
     border-right: 1px solid #939DCE;
@@ -58,7 +59,6 @@
 }
 
 .nav-buttons button:hover {
-    background-color: #F0F0F0;
     color: #0B0B54;
 }
 
@@ -136,3 +136,31 @@
         padding: 5px;
     }
 }
+
+.background-container {
+    position: fixed;
+    top: 60px; /* Ajuste conforme a altura da navbar */
+    left: 0;
+    width: 100%;
+    z-index: 0; /* Coloca o fundo atrás de tudo */
+  }
+  
+  .background-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .image-container {
+    z-index: 2;
+    width:500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Ajuste o padding conforme necessário */
+  }
+  
+  .below-navbar-image {
+    max-width: 100%;
+    height: auto;
+    /* Outros estilos para a imagem, se necessário */
+  }

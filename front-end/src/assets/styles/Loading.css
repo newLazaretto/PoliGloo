@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; 
+}
+
+.loading-overlay img {
+  width: 300px; 
+  height: auto;
+}
+
+.loading-overlay p {
+  display: inline-block;
+  margin: 0; 
+  margin-top: 10px;
+  font-size: 35pt;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #939DCE;
+}
+
+@keyframes pulse {
+  0%, 20%, 100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.5);
+  }
+}
+
+.loading-overlay d {
+  display: inline-block;
+  margin-right: 30px; 
+  margin-top: 0px;
+  font-size: 35pt;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #939DCE;
+} 
+
+.loading-overlay .dots {
+  position: absolute;
+  font-size: 36px;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+.loading-overlay .dots:nth-child(1) {
+  animation: pulse 1.5s infinite; 
+}
+
+.loading-overlay .dots:nth-child(2) {
+  margin-left: 18px;
+  animation: pulse 1.5s infinite 0.5s; 
+}
+
+.loading-overlay .dots:nth-child(3) {
+  margin-left: 32px;
+  animation: pulse 1.5s infinite 1s; 
+}
