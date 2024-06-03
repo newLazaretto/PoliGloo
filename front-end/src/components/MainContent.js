@@ -8,18 +8,27 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 
 const MainContent = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'false');
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true' ? true : false);
   const navigate = useNavigate();
   const location = useLocation();
   const [section, setSection] = useState('');
   const isRootRoute = location.pathname === '/';
 
   useEffect(() => {
+
+    console.log('isAuthenticated:', isAuthenticated);
+    console.log('location.pathname:', location.pathname);
     // Redirect to login if not authenticated and not on the register page
-    if (!isAuthenticated && location.pathname !== '/register' && location.pathname !== '/login') {
+    if (!isAuthenticated && !/^\/(register|login)$/.test(location.pathname)) {
       navigate('/login');
+    } else if (!isAuthenticated && location.pathname === '/user') {
+      // Redirect to login if user tries to access /user while unauthenticated
+      navigate('/login');
+    } else if (isAuthenticated && /^\/(login|register)$/.test(location.pathname)) {
+      // Redirect to root if authenticated and trying to access login or register
+      navigate('/');
     }
-  }, []);
+  }, [isAuthenticated, location.pathname, navigate]);
 
   const toggleSection = (selectedSection) => {
     setSection((prevSection) => (prevSection === selectedSection ? '' : selectedSection));
@@ -43,17 +52,25 @@ const MainContent = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Simulate logout by removing auth data
+    localStorage.removeItem('isAuthenticated');
+    setIsAuthenticated(false);
+    navigate('/'); // Redirect to home after logout
+  };
+
   return (
     <div className="App">
       {isAuthenticated ? (
         <>
           {isRootRoute && <Navbar toggleSection={toggleSection} />}
+          <button className="logout-button"onClick={handleLogout}>Logout</button>
           <Routes>
             <Route path="/" element={
               section === 'explore' ? <Explore /> :
-              section === 'communities' ? <Communities /> : null
+                section === 'communities' ? <Communities /> : null
             } />
-            <Route path="/:communityId" element={<CommunityPage />} />
+            <Route path="/:communityId/*" element={<CommunityPage />} />
           </Routes>
         </>
       ) : (

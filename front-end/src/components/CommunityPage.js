@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import '../assets/styles/CommunityPage.css';
-import communityData from './communityData';
+import communityData from './CommunityData';
 import backLogo from '../assets/images/logo-voltar.png';
 import userLogo from '../assets/images/perfil.png';
 

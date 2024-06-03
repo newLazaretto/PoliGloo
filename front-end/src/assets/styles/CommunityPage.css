@@ -1,11 +1,16 @@
 /* src/assets/styles/CommunityPage.css */
 .community-page {
-  display: flex;
+
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
+  background-color: #F5F5F5;
+  display: flex;
+  margin-left: 2%;
+  padding-top: 80px;
 }
 
 .community {
+  
   position: fixed;
   top: 0;
   width: 100%;
@@ -15,13 +20,22 @@
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #939DCE;
-  justify-content: space-between;
+
 }
 
-.community-back-button, .community-user-button {
-  width: 50px;
-  height: 50px;
+.community-back-button {
+  color: transparent;
   cursor: pointer;
+  width: 150px;
+  margin-bottom: 17px;
+  margin-top: 18px;
+  background: transparent;
+}
+
+.community-user-button {
+  width: 120px;
+  cursor: pointer;
+  margin-right: 50px;
 }
 
 .community-buttons {
@@ -31,20 +45,38 @@
 }
 
 .community-buttons button {
-  padding: 10px 20px;
+  padding: 1.2% 20px;
+    
   background-color: transparent;
   border: none;
   font-family: 'Poppins', sans-serif;
-  font-size: 1em;
+  font-size: 1.8em;
   color: #837FD6;
   cursor: pointer;
-  margin: 0 10px;
+  margin: 0 5%;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .community-buttons button:hover {
-  background-color: #F0F0F0;
+  
   color: #0B0B54;
+}
+
+.community-buttons button:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  left: 0;
+  bottom: 0px;
+  height: 4px;
+  background-color: #939DCE;
+  transition: all 0.3s ease;
+  border-radius: 100px;
+}
+
+.community-buttons button:hover:after {
+  width: 100%;
 }
 
 .sidebar {
@@ -102,21 +134,25 @@
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
-  margin-left: 300px; /* Ajuste para evitar sobreposição com a sidebar */
+  margin-right: 600px;
+  /* Ajuste para evitar sobreposição com a sidebar */
 }
 
-.avisos, .arquivos {
+.avisos,
+.arquivos {
   padding: 20px;
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.aviso, .arquivo {
+.aviso,
+.arquivo {
   margin-bottom: 10px;
 }
 
-.aviso h3, .arquivo a {
+.aviso h3,
+.arquivo a {
   font-size: 1.2em;
   color: #333;
 }
