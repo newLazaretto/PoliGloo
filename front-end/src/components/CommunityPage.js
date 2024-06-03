@@ -1,24 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import '../assets/styles/CommunityPage.css';
-import communityData from './CommunityData';
 import backLogo from '../assets/images/logo-voltar.png';
 import userLogo from '../assets/images/perfil.png';
+import CommunityData from './CommunityData';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
   const { communityId } = useParams();
   const [community, setCommunity] = useState(null);
   const [posts, setPosts] = useState([]);
-
+  const [avisos, setAvisos] = useState([]);
+  const [newPost, setNewPost] = useState('');
+  const [newAvisoTitle, setNewAvisoTitle] = useState('');
+  const [newAvisoContent, setNewAvisoContent] = useState('');
+/*
   useEffect(() => {
-    const selectedCommunity = communityData.find((community) => community.id === communityId);
+    fetch(`/${communityId}`)
+      .then(response => response.json())
+      .then(data => {
+        setCommunity(data);
+        setPosts(data.posts || []);
+        setAvisos(data.avisos || []);
+      })
+      .catch(error => console.error('Error fetching community:', error));
+  }, [communityId]);
+*/
+  useEffect(() => {
+    const selectedCommunity = CommunityData.find((community) => community.id === communityId);
     setCommunity(selectedCommunity);
-    // Simulação de fetch de posts
     if (selectedCommunity) {
       setPosts(selectedCommunity.posts || []);
     }
   }, [communityId]);
+
+  const handlePostSubmit = (event) => {
+    event.preventDefault();
+    if (newPost) {
+      const newPostData = {
+        id: posts.length + 1,
+        username: 'Usuário',
+        mensagem: newPost,
+        data_hora: new Date().toISOString(),
+      };
+      setPosts([...posts, newPostData]);
+      setNewPost('');
+    }
+  };
+
+  const handleAvisoSubmit = (event) => {
+    event.preventDefault();
+    if (newAvisoTitle && newAvisoContent) {
+      const newAvisoData = {
+        id: avisos.length + 1,
+        title: newAvisoTitle,
+        content: newAvisoContent,
+      };
+      setAvisos([...avisos, newAvisoData]);
+      setNewAvisoTitle('');
+      setNewAvisoContent('');
+    }
+  };
 
   if (!community) {
     return <div>Carregando...</div>;
@@ -33,12 +75,12 @@ const CommunityPage = () => {
           src={backLogo}
           alt="Voltar"
           className="community-back-button"
-          onClick={() => navigate('/communities')}
+          onClick={() => navigate('/')}
         />
         <div className="community-buttons">
           <button onClick={() => navigate(`/${community.id}/Avisos`)}>Avisos</button>
-          <button onClick={() => navigate(`/${community.id}/Geral`)}>Geral</button>
-          <button onClick={() => navigate(`/${community.id}/Arquivos`)}>Arquivos</button>
+          <button onClick={() => navigate(`/${communityId}/Geral`)}>Geral</button>
+          <button onClick={() => navigate(`/${communityId}/Arquivos`)}>Arquivos</button>
         </div>
         <img
           src={userLogo}
@@ -53,24 +95,21 @@ const CommunityPage = () => {
           <h2 className="community-name">{name}</h2>
           <p className="community-members">{members.length} membros</p>
         </div>
-        
-        {/*
-      <div className="member-list"> 
-        {members.map((member) => (
-          <div key={member.id} className="member">
-            <img src={member.avatar} alt={member.name} className="member-avatar" />
-            <p className="member-name">{member.name}</p>
-          </div>
-        ))} 
-      </div>
-      */}
-        
-        
+
+        {/* Descomente esta seção para mostrar a lista de membros */}
+        {/* <div className="member-list"> 
+          {members.map((member) => (
+            <div key={member.id} className="member">
+              <img src={member.avatar} alt={member.name} className="member-avatar" />
+              <p className="member-name">{member.name}</p>
+            </div>
+          ))} 
+        </div> */}
       </div>
       <div className="main-content">
         <Routes>
-          <Route path="/:communityId/Avisos" element={<Avisos />} />
-          <Route path="/:communityId/Geral" element={<Geral posts={posts} />} />
+          <Route path="/:communityId/Avisos" element={<Avisos avisos={avisos} onNewAvisoSubmit={handleAvisoSubmit} newAvisoTitle={newAvisoTitle} setNewAvisoTitle={setNewAvisoTitle} newAvisoContent={newAvisoContent} setNewAvisoContent={setNewAvisoContent} />} />
+          <Route path="/:communityId/Geral" element={<Geral posts={posts} onNewPostSubmit={handlePostSubmit} newPost={newPost} setNewPost={setNewPost} />} />
           <Route path="/:communityId/Arquivos" element={<Arquivos />} />
         </Routes>
       </div>
@@ -78,13 +117,7 @@ const CommunityPage = () => {
   );
 };
 
-const Avisos = () => {
-  // Simulação de fetch de avisos
-  const avisos = [
-    { id: 1, title: "Aviso 1", content: "Conteúdo do aviso 1" },
-    { id: 2, title: "Aviso 2", content: "Conteúdo do aviso 2" },
-  ];
-
+const Avisos = ({ avisos }) => {
   return (
     <div className="avisos">
       <h2>Avisos</h2>
@@ -109,7 +142,6 @@ const Geral = ({ posts }) => {
 };
 
 const Arquivos = () => {
-  // Simulação de fetch de arquivos
   const arquivos = [
     { id: 1, name: "Arquivo 1", url: "/path/to/arquivo1" },
     { id: 2, name: "Arquivo 2", url: "/path/to/arquivo2" },
