@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlusSquare } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import CommunityData from './CommunityData';
+import CommunityData from './communityData';
 import '../assets/styles/Communities.css';
 import { FaSquareCheck } from "react-icons/fa6";
 
@@ -66,13 +66,13 @@ const Communities = () => {
   };
 
   const getMembersMessage = (members) => {
-    const memberNames = members.slice(0, 2).join(', ');
+    const memberNames = members.slice(0, 2).map(name => `<b>${name}</b>`).join(', ');
     const additionalCount = members.length - 2;
     return additionalCount > 0
-      ? `${memberNames} e outras ${additionalCount} pessoas também participam`
+      ? `${memberNames} e outras <b>${additionalCount}</b> pessoas também participam`
       : memberNames;
   };
-
+  
   return (
     <div className="communities">
       <ul>
@@ -81,8 +81,8 @@ const Communities = () => {
             <button className="communities-button" onClick={() => handleCommunityClick(community)}>
               <img className="communities-iglu" src={CommunityData[community.id].image} alt={community.name}></img>
               <div className="button-background">
-                <span className="communities-text">{CommunityData[community.id].name}</span>
-                <span className="members-text">{getMembersMessage(CommunityData[community.id].members.map(member => member.username))}</span>
+                <span className="communities-text"><b>{CommunityData[community.id].name}</b></span>
+                <span className="members-text" dangerouslySetInnerHTML={{ __html: getMembersMessage(CommunityData[community.id].members.map(member => member.username)) }}></span>
               </div>
             </button>
             <button
@@ -98,6 +98,7 @@ const Communities = () => {
       </ul>
     </div>
   );
-};
-
-export default Communities;
+  };
+  
+  export default Communities;
+  

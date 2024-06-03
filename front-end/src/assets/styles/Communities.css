@@ -7,17 +7,11 @@
   border: 1px solid #939DCE;;
   flex-direction: column;
   align-items: center;
-  padding: 1%;
-  padding-top: 9%;
-  padding-left: 9%;
+  padding: 19.7px;
   width: 65%;
   background-color: transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  
-  margin-left: 5%;
-  
 }
-
 
 .header {
   font-size: 34px;
@@ -81,33 +75,19 @@
   background-image: url('../images/forma--titulo-comunidades.png');
   background-size: 100% 100%; 
   background-repeat: no-repeat;
-  padding-right: 1%;
-  align-items: center;
 }
 
 .communities-text {
   margin-left: 6px;
-  
+  display: inline-block; 
   text-align: center;
-  font-size: 1.9rem;
+  font-size: 23px;
   font-family: 'Fredoka';
   font-weight: 700;
   color: #939dce;
-  margin-left: 10px;
 }
 
-.members-text {
-  font-size: 0.9em;
-  color: #555;
-  margin-top: 90px;
-  left: 21%;
-  
-  position: absolute;
-  top:50px;
-  
-  align-items: center;
-  background-color: #D6D6F2
-}
+
 
 .join-communities-button {
   font-size: 57px;
@@ -127,3 +107,17 @@
 .join-communities-button.joined {
   color: #197ad4;
 }
+
+.members-text {
+  font-size: 1em;
+  margin-top: 47px;
+  left: 21%;
+  position: absolute;
+  background-color: #e1e1f4;
+  border-radius: 10px;
+  padding: 0.4%;
+  font-family: 'Poppins';
+  font-weight: 300;
+  color: #384e7a;
+}
+

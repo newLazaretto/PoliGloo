@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Routes, Route } from 'react-router-dom';
 import '../assets/styles/CommunityPage.css';
-import CommunityData from './CommunityData';
+import CommunityData from './communityData';
 
 const CommunityPage = () => {
   const navigate = useNavigate();

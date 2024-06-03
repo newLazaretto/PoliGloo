@@ -6,8 +6,8 @@ import sampleImage from '../assets/images/logo3.png'; // Substitua pelo caminho 
 import brickWallImage from '../assets/images/brick-wall.png'; // Substitua pelo caminho da sua imagem de fundo
 
 function Navbar({ toggleSection }) {
-  const [isImageVisible, setImageVisible] = useState(true);
-  const [isBackgroundVisible, setBackgroundVisible] = useState(true);
+  const [isImageVisible, setImageVisible] = useState(false);
+  const [isBackgroundVisible, setBackgroundVisible] = useState(false);
 
   const handleButtonClick = (section) => {
     if (section === 'user') {
