@@ -1,14 +1,13 @@
 // src/components/Communities.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaPlusSquare } from "react-icons/fa";
+import { FaSquareCheck } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import communityData from './communityData';
 import '../assets/styles/Communities.css';
-import { FaSquareCheck } from "react-icons/fa6";
 
 const Communities = () => {
   const navigate = useNavigate();
-  const [communities, setCommunities] = useState([]);
   const [joinedCommunities, setJoinedCommunities] = useState([]);
 
   const handleCommunityClick = (community) => {
@@ -16,37 +15,31 @@ const Communities = () => {
   };
 
   const handleJoinCommunity = (communityId) => {
-    fetch(`http://192.168.0.5:8080/join/${communityId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          setJoinedCommunities([...joinedCommunities, communityId]);
-        } else {
-          console.error('Error joining community:', response.statusText);
-        }
-      })
-      .catch(error => console.error('Error joining community:', error));
+    if (joinedCommunities.includes(communityId)) {
+      setJoinedCommunities(joinedCommunities.filter(id => id !== communityId));
+    } else {
+      setJoinedCommunities([...joinedCommunities, communityId]);
+    }
   };
 
   return (
     <div className="communities">
-      <div className="background-image"></div>
       <ul>
         {communityData.map((community) => (
           <li key={community.id}>
             <button className="communities-button" onClick={() => handleCommunityClick(community)}>
-              <img className="communities-iglu"src={community.image} alt={''}></img>
-              <div className="button-background"></div> 
-              <text className="communities-text" >{community.name} ({community.members})</text>
+              <img className="communities-iglu" src={community.image} alt={''}></img>
+              <div className="button-background">
+                <span className="communities-text">{community.name} ({community.members})</span>
+              </div>
             </button>
-            <button className="join-communities-button" onClick={() => handleJoinCommunity(community.id)}>
+            <button
+              className={`join-communities-button ${joinedCommunities.includes(community.id) ? 'joined' : 'not-joined'}`}
+              onClick={() => handleJoinCommunity(community.id)}
+            >
               {joinedCommunities.includes(community.id)
                 ? <FaSquareCheck />
-                : <FaPlusSquare onClick={() => handleJoinCommunity(community.id)} />}
+                : <FaPlusSquare />}
             </button>
           </li>
         ))}

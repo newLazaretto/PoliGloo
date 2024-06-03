@@ -2,15 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
 .communities {
-  margin-top: -394px;
+  margin-top: -405px;
   background-image: url('../images/brick-wall.png');
   border: 1px solid #939DCE;;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 19.7px;
   width: 65%;
   background-color: transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 0;
 }
 
 .header {
@@ -70,41 +71,41 @@
 }
 
 .button-background {
-  position: absolute;
-  top: 50%;
-  left: 16%;
-  transform: translateY(-50%);
-  width: 30%;
-  height: 30%;
+  display: inline-block; 
+  padding: 12px;
   background-image: url('../images/forma--titulo-comunidades.png');
-  background-size: contain;
+  background-size: 100% 100%; 
   background-repeat: no-repeat;
 }
 
 .communities-text {
-  position: relative;
+  margin-left: 6px;
+  display: inline-block; 
   text-align: center;
   font-size: 23px;
   font-family: 'Fredoka';
   font-weight: 700;
   color: #939dce;
-  z-index: 1; /* Garantir que o texto esteja sobre o background */
+  z-index: 2; 
 }
+
+
+
 .join-communities-button {
-  font-size: 33px;
-  color: #939dce;
+  font-size: 57px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 10px;
-  display: flex;
-  align-items:center;
+  padding: 16px;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
 }
 
+.join-communities-button.not-joined {
+  color: #939dce;
+}
 
-
-
-.communities .community-members {
-  font-size: 2000px;
-  color: #666;
+.join-communities-button.joined {
+  color: #197ad4;
 }
