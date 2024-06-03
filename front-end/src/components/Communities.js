@@ -34,18 +34,20 @@ const Communities = () => {
 
   return (
     <div className="communities">
+      <div className="background-image"></div>
       <ul>
         {communityData.map((community) => (
           <li key={community.id}>
             <button className="communities-button" onClick={() => handleCommunityClick(community)}>
-              <img src={community.image} alt={''}></img>
-              {community.name} ({community.members})
+              <img className="communities-iglu"src={community.image} alt={''}></img>
+              <div className="button-background"></div> 
+              <text className="communities-text" >{community.name} ({community.members})</text>
             </button>
-              <button className="join-communities-button"onClick={() => handleJoinCommunity(community.id)}>
-                {joinedCommunities.includes(community.id)
-                  ? <FaSquareCheck />
-                  : <FaPlusSquare onClick={() => handleJoinCommunity(community.id)} />}
-              </button>
+            <button className="join-communities-button" onClick={() => handleJoinCommunity(community.id)}>
+              {joinedCommunities.includes(community.id)
+                ? <FaSquareCheck />
+                : <FaPlusSquare onClick={() => handleJoinCommunity(community.id)} />}
+            </button>
           </li>
         ))}
       </ul>
@@ -54,4 +56,3 @@ const Communities = () => {
 };
 
 export default Communities;
-

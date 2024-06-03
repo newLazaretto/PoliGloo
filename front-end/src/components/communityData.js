@@ -3,10 +3,11 @@ import igluImage from '../assets/images/Iglu.png';
 import community2Image from '../assets/images/Iglu2.png';
 import community3Image from '../assets/images/Iglu3.png';
 
+
 const communities = [
-  { id: "Avisos", image: igluImage, name: 'Avisos', members: 20, posts: [] },
-  { id: "Compiladores", image: community2Image, name: 'Compiladores', members: 25, posts: [] },
-  { id: "RedesNeurais", image: community3Image, name: 'Redes Neurais', members: 30, posts: [] },
+  { id: "avisos", image: igluImage, name: 'AVISOS', members: 20, posts: [] },
+  { id: "compiladores", image: community2Image, name: 'COMPILADORES', members: 25, posts: [] },
+  { id: "RedesNeurais", image: community3Image, name: 'REDES NEURAIS', members: 30, posts: [] },
 ];
 
 export default communities
