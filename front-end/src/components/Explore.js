@@ -13,8 +13,11 @@ const Explore = () => {
     )
     .sort((a, b) => CommunityData[b].members.length - CommunityData[a].members.length);
 
-  const favoriteCommunityId = filteredCommunities [0];
-  const favoriteCommunity = CommunityData[favoriteCommunityId];
+  const favoriteCommunityId = Object.keys(CommunityData)
+    .sort((a, b) => CommunityData[b].members.length - CommunityData[a].members.length)[0];
+  const favoriteCommunity = favoriteCommunityId && CommunityData[favoriteCommunityId];
+  
+  
 
   const recentPosts = Object.values(CommunityData)
     .flatMap(community => community.posts)
