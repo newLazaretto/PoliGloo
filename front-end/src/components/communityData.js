@@ -7,7 +7,10 @@ const CommunityData = {
   Avisos: {
     name: 'Avisos',
     creator: 'admin',
-    members: [{ username: 'user1' }, { username: 'user2' }, { username: 'user3' }, { username: 'user4' }],
+    members: [
+      { username: 'user1' }, { username: 'user2' }, { username: 'user3' }, { username: 'user4' }
+
+    ],
     posts: [
       { id: 1, username: 'user1', mensagem: 'Primeiro post de exemplo', data_hora: new Date().toISOString() },
       { id: 2, username: 'user2', mensagem: 'Segundo post de exemplo', data_hora: new Date().toISOString() }
@@ -26,17 +29,26 @@ const CommunityData = {
     name: 'Compiladores',
     creator: 'admin',
     members: [{ username: 'user3' }, { username: 'user4' }],
-    posts: [],
-    avisos: [],
-    arquivos: [],
+    posts: [{ id: 1, username: 'user1', mensagem: 'Primeiro post de exemplo', data_hora: new Date().toISOString() }
+
+    ],
+    avisos: [
+
+    ],
+    arquivos: [
+
+    ],
     image: community2Image
   },
   RedesNeurais: {
     name: 'Redes Neurais',
     creator: 'admin',
-    members: [{ username: 'user5' }, { username: 'user6' }],
-    posts: [],
-    avisos: [],
+    members: [
+      { username: 'user5' }, { username: 'user6' },
+
+    ],
+    posts: [{ id: 1, username: 'user1', mensagem: 'Primeiro post de exemplo', data_hora: new Date().toISOString() }],
+    avisos: [{ id: 1, title: 'Aviso 1', content: 'Conteúdo do aviso 1' }],
     arquivos: [],
     image: community3Image
   }
