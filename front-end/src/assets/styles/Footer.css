@@ -1,0 +1,23 @@
+/* src/App.css */
+.footer {
+    position: relative;
+    margin-top: 0px;
+    bottom: 0;
+    width: 100%;
+    
+    
+    background-color: #f5f5f5;/* Ajuste conforme necessário para o tamanho do seu footer */
+  }
+  .footer p {
+    text-align: center;
+    padding-right: 15%;
+    margin: 0;
+    margin-left: 15%;
+    font-size: 15pt;
+    color: #939DCE;
+  }
+  .insta {
+    width: 2.5%;
+    margin-left: 1%;
+    position: relative;
+  }

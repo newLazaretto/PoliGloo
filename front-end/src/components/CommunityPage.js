@@ -9,16 +9,33 @@ import logoUser from '../assets/images/perfil.png';
 const CommunityPage = ({ communities }) => {
   const navigate = useNavigate();
   const { communityId } = useParams();
-  const community = communities[communityId];
-  const [posts, setPosts] = useState(community.posts);
-  const [avisos, setAvisos] = useState(community.avisos);
-  const [arquivos, setArquivos] = useState(community.arquivos);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [community, setCommunity] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [avisos, setAvisos] = useState([]);
+  const [arquivos, setArquivos] = useState([]);
+  const [newPost, setNewPost] = useState('');
+  const [newAvisoTitle, setNewAvisoTitle] = useState('');
+  const [newAvisoContent, setNewAvisoContent] = useState('');
+  const [newArquivoName, setNewArquivoName] = useState('');
+  const [newArquivoUrl, setNewArquivoUrl] = useState('');
 
+  useEffect(() => {
+    const selectedCommunity = CommunityData[communityId];
+    if (selectedCommunity) {
+      setCommunity(selectedCommunity);
+      setPosts(selectedCommunity.posts || []);
+      setAvisos(selectedCommunity.avisos || []);
+      setArquivos(selectedCommunity.arquivos || []);
+    }
+  }, [communityId]);
 
-  const addPost = (username, mensagem) => {
-    const newPost = {
+  const handleNewPostSubmit = (e) => {
+    e.preventDefault();
+    const newPostData = {
       id: posts.length + 1,
+      username,
+      mensagem,
+      data_hora: new Date().toISOString(),
       username,
       mensagem,
       data_hora: new Date().toISOString(),
@@ -28,23 +45,37 @@ const CommunityPage = ({ communities }) => {
 
   const addAviso = (title, content) => {
     const newAviso = {
+    setPosts([...posts, newPost]);
+  };
+
+  const addAviso = (title, content) => {
+    const newAviso = {
       id: avisos.length + 1,
       title,
       content,
+      title,
+      content,
     };
+    setAvisos([...avisos, newAviso]);
     setAvisos([...avisos, newAviso]);
   };
 
   const addArquivo = (name, url) => {
     const newArquivo = {
+  const addArquivo = (name, url) => {
+    const newArquivo = {
       id: arquivos.length + 1,
+      name,
+      url,
       name,
       url,
     };
     setArquivos([...arquivos, newArquivo]);
+    setArquivos([...arquivos, newArquivo]);
   };
 
   if (!community) {
+    return <div>Comunidade não encontrada</div>;
     return <div>Comunidade não encontrada</div>;
   }
 
@@ -166,7 +197,35 @@ const PostForm = ({ onAddPost }) => {
     setMensagem('');
   };
 
+
+const PostForm = ({ onAddPost }) => {
+  const [username, setUsername] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddPost(username, mensagem);
+    setUsername('');
+    setMensagem('');
+  };
+
   return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Seu nome de usuário"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <textarea
+        placeholder="Sua mensagem"
+        value={mensagem}
+        onChange={(e) => setMensagem(e.target.value)}
+        required
+      />
+      <button type="submit">Adicionar Post</button>
+    </form>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -197,7 +256,34 @@ const AvisoForm = ({ onAddAviso }) => {
     setContent('');
   };
 
+const AvisoForm = ({ onAddAviso }) => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddAviso(title, content);
+    setTitle('');
+    setContent('');
+  };
+
   return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Título do aviso"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <textarea
+        placeholder="Conteúdo do aviso"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        required
+      />
+      <button type="submit">Adicionar Aviso</button>
+    </form>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -228,7 +314,35 @@ const ArquivoForm = ({ onAddArquivo }) => {
     setUrl('');
   };
 
+const ArquivoForm = ({ onAddArquivo }) => {
+  const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddArquivo(name, url);
+    setName('');
+    setUrl('');
+  };
+
   return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Nome do arquivo"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="URL do arquivo"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        required
+      />
+      <button type="submit">Carregar Arquivo</button>
+    </form>
     <form onSubmit={handleSubmit}>
       <input
         type="text"

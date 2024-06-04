@@ -6,11 +6,17 @@ import user1Image from '../assets/images/1.png';
 import user2Image from '../assets/images/2.png';
 import user3Image from '../assets/images/3.png';
 import user4Image from '../assets/images/4.png';
+import user1Image from '../assets/images/1.png';
+import user2Image from '../assets/images/2.png';
+import user3Image from '../assets/images/3.png';
+import user4Image from '../assets/images/4.png';
 
 const CommunityData = {
   Avisos: {
     name: 'AVISOS',
+    name: 'AVISOS',
     creator: 'admin',
+    members: [{ username: 'Monalisa', image: user1Image, program: 'Engenharia da Computação'  }, { username: 'Leonardo', image: user2Image, program: 'Engenharia da Computação' }, { username: 'Gabriel', image: user3Image, program: 'Engenharia da Computação' }, { username: 'Igor', image: user4Image, program: 'Engenharia da Computação' }],
     members: [{ username: 'Monalisa', image: user1Image, program: 'Engenharia da Computação'  }, { username: 'Leonardo', image: user2Image, program: 'Engenharia da Computação' }, { username: 'Gabriel', image: user3Image, program: 'Engenharia da Computação' }, { username: 'Igor', image: user4Image, program: 'Engenharia da Computação' }],
     posts: [
       { id: 1, username: 'Roberta', mensagem: 'Primeiro post de exemplo', data_hora: new Date().toISOString() },
@@ -51,4 +57,3 @@ const CommunityData = {
 };
 
 export default CommunityData;
-

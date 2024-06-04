@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlusSquare } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import CommunityData from './communityData';
 import '../assets/styles/Communities.css';
 import { FaSquareCheck } from "react-icons/fa6";
-
+import CommunityData from './CommunityData';
+import { Link } from 'react-router-dom';
 
 const Communities = () => {
   const navigate = useNavigate();
@@ -19,22 +19,24 @@ const Communities = () => {
       .catch(error => console.error('Error fetching communities:', error));
   }, []);
   */
-
-  useEffect(() => {
-    // Simulação de carregamento das comunidades
-    const fetchCommunities = async () => {
-      // Aqui você pode fazer uma chamada fetch para obter as comunidades do servidor, ou usar dados estáticos
-      const data = Object.keys(CommunityData).map(key => ({
-        id: key,
-        name: CommunityData[key].name,
-        members: CommunityData[key].members.map(member => member.username)
-      }));
-      setCommunities(data);
-    };
-
-    fetchCommunities();
-  }, []);
-
+  /*
+    useEffect(() => {
+      // Simulação de carregamento das comunidades
+      const fetchCommunities = async () => {
+        // Aqui você pode fazer uma chamada fetch para obter as comunidades do servidor, ou usar dados estáticos
+        const data = Object.keys(CommunityData).map(key => ({
+          id: key,
+          name: CommunityData[key].name,
+          members: CommunityData[key].members.map(member => member.username)
+        }));
+        setCommunities(data);
+      };
+  
+      fetchCommunities();
+    }, []);
+  */
+  
+    
   const handleCommunityClick = (community) => {
     navigate(`/${community.id}`);
   };
@@ -66,30 +68,30 @@ const Communities = () => {
   };
 
   const getMembersMessage = (members) => {
-    const memberNames = members.slice(0, 2).map(name => `<b>${name}</b>`).join(', ');
+    const memberNames = members.slice(0, 2).join(', ');
     const additionalCount = members.length - 2;
     return additionalCount > 0
-      ? `${memberNames} e outras <b>${additionalCount}</b> pessoas também participam`
+      ? `${memberNames} e outras ${additionalCount} pessoas também participam`
       : memberNames;
   };
-  
+
   return (
     <div className="communities">
       <ul>
-        {communities.map((community) => (
-          <li key={community.id}>
-            <button className="communities-button" onClick={() => handleCommunityClick(community)}>
-              <img className="communities-iglu" src={CommunityData[community.id].image} alt={community.name}></img>
+        {Object.keys(CommunityData).map(communityId => (
+          <li key={communityId}>
+            <button className="communities-button" onClick={() => handleCommunityClick({ id: communityId })}>
+              <img className="communities-iglu" src={CommunityData[communityId].image} alt={CommunityData[communityId].name} />
               <div className="button-background">
-                <span className="communities-text"><b>{CommunityData[community.id].name}</b></span>
-                <span className="members-text" dangerouslySetInnerHTML={{ __html: getMembersMessage(CommunityData[community.id].members.map(member => member.username)) }}></span>
+                <span className="communities-text">{CommunityData[communityId].name}</span>
+                <span className="members-text">{getMembersMessage(CommunityData[communityId].members.map(member => member.username))}</span>
               </div>
             </button>
             <button
-              className={`join-communities-button ${joinedCommunities.includes(community.id) ? 'joined' : 'not-joined'}`}
-              onClick={() => handleJoinCommunity(community.id)}
+              className={`join-communities-button ${joinedCommunities.includes(communityId) ? 'joined' : 'not-joined'}`}
+              onClick={() => handleJoinCommunity(communityId)}
             >
-              {joinedCommunities.includes(community.id)
+              {joinedCommunities.includes(communityId)
                 ? <FaSquareCheck />
                 : <FaPlusSquare />}
             </button>
@@ -99,8 +101,8 @@ const Communities = () => {
       <div className="vertical-line left-line"></div> 
     <div className="vertical-line right-line"></div> 
     </div>
-  );  
-  };
-  
-  export default Communities;
-  
+  );
+};
+
+export default Communities;
+
