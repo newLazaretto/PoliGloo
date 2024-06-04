@@ -98,6 +98,8 @@ const Communities = () => {
           </li>
         ))}
       </ul>
+      <div className="vertical-line left-line"></div> 
+    <div className="vertical-line right-line"></div> 
     </div>
   );
 };
