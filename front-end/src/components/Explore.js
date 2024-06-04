@@ -1,7 +1,7 @@
 // src/components/Explore.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CommunityData from './CommunityData';
+import CommunityData from './communityData';
 import '../assets/styles/Explore.css';
 
 const Explore = () => {

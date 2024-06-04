@@ -6,10 +6,6 @@ import user1Image from '../assets/images/1.png';
 import user2Image from '../assets/images/2.png';
 import user3Image from '../assets/images/3.png';
 import user4Image from '../assets/images/4.png';
-import user1Image from '../assets/images/1.png';
-import user2Image from '../assets/images/2.png';
-import user3Image from '../assets/images/3.png';
-import user4Image from '../assets/images/4.png';
 
 const CommunityData = {
   Avisos: {
