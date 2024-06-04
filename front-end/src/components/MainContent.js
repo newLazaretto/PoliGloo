@@ -6,6 +6,7 @@ import Communities from './Communities';
 import CommunityPage from './CommunityPage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
+import CommunityData from './communityData';
 
 const MainContent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true' ? true : false);
@@ -70,7 +71,7 @@ const MainContent = () => {
               section === 'explore' ? <Explore /> :
                 section === 'communities' ? <Communities /> : null
             } />
-            <Route path="/:communityId/*" element={<CommunityPage />} />
+           <Route path="/:communityId/*" element={<CommunityPage communities={CommunityData} />} />
           </Routes>
         </>
       ) : (

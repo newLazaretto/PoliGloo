@@ -13,8 +13,10 @@ body {
 
 .logout-button {
   position: absolute;
-  top: 1.85%;
-  left: 90.5%;
+  top: 2.4%;
+  left: 89%;
+  margin-inline-end: auto;
+  margin-inline-start:1%;
   cursor: pointer;
   font-size: 1.4em;
   color: #837FD6;

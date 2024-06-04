@@ -47,7 +47,7 @@
 
   list-style: none;
   padding: 0;
-  width: 100%; /* Garantir que a lista não ultrapasse a div */
+  width: 100%; 
   margin-bottom: -10px;
 }
 

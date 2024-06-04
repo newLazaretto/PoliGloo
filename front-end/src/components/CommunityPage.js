@@ -1,115 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Routes, Route } from 'react-router-dom';
+// src/components/CommunityPage.js
+import React, { useState } from 'react';
+import { useParams,  useNavigate, Routes, Route } from 'react-router-dom';
 import '../assets/styles/CommunityPage.css';
-import CommunityData from './communityData';
+import logo from '../assets/images/logo-voltar.png';
+import logoUser from '../assets/images/perfil.png';
 
-const CommunityPage = () => {
+
+const CommunityPage = ({ communities }) => {
   const navigate = useNavigate();
   const { communityId } = useParams();
-  const [community, setCommunity] = useState(null);
-  const [posts, setPosts] = useState([]);
-  const [avisos, setAvisos] = useState([]);
-  const [arquivos, setArquivos] = useState([]);
-  const [newPost, setNewPost] = useState('');
-  const [newAvisoTitle, setNewAvisoTitle] = useState('');
-  const [newAvisoContent, setNewAvisoContent] = useState('');
-  const [newArquivoName, setNewArquivoName] = useState('');
-  const [newArquivoUrl, setNewArquivoUrl] = useState('');
+  const community = communities[communityId];
+  const [posts, setPosts] = useState(community.posts);
+  const [avisos, setAvisos] = useState(community.avisos);
+  const [arquivos, setArquivos] = useState(community.arquivos);
   const [isExpanded, setIsExpanded] = useState(true);
 
-  /*
-  useEffect(() => {
-    fetch(`/${communityId}`)
-      .then(response => response.json())
-      .then(data => {
-        setCommunity(data);
-        setPosts(data.posts || []);
-        setAvisos(data.avisos || []);
-        setArquivos(data.arquivos || []);
-      })
-      .catch(error => console.error('Error fetching community:', error));
-  }, [communityId]);
-*/
-  /*
-  useEffect(() => {
-      const selectedCommunity = communityData.find((community) => community.id === communityId);
-      setCommunity(selectedCommunity);
-      // Simulação de fetch de posts
-      if (selectedCommunity) {
-        setPosts(selectedCommunity.posts || []);
-      }
-    }, [communityId]);
-  */
-  useEffect(() => {
-    const selectedCommunity = CommunityData[communityId];
-    if (selectedCommunity) {
-      setCommunity(selectedCommunity);
-      setPosts(selectedCommunity.posts || []);
-      setAvisos(selectedCommunity.avisos || []);
-      setArquivos(selectedCommunity.arquivos || []);
-    }
-  }, [communityId]);
 
-  const handleNewPostSubmit = (e) => {
-    e.preventDefault();
-    const newPostData = {
+  const addPost = (username, mensagem) => {
+    const newPost = {
       id: posts.length + 1,
-      username: 'currentUser',
-      mensagem: newPost,
-      data_hora: new Date().toISOString()
+      username,
+      mensagem,
+      data_hora: new Date().toISOString(),
     };
-    setPosts([...posts, newPostData]);
-    setNewPost('');
-
-    // Envie a requisição para criar o post no backend, se necessário
-    // fetch('/create-post', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ nomeComunidade: communityId, username: 'currentUser', mensagem: newPost })
-    // })
-    // .then(response => {
-    //   if (response.ok) {
-    //     // Atualize os posts após criar o post no backend, se necessário
-    //   } else {
-    //     console.error('Failed to create post');
-    //   }
-    // })
-    // .catch(error => console.error('Error creating post:', error));
+    setPosts([...posts, newPost]);
   };
 
-  const handleNewAvisoSubmit = (e) => {
-    e.preventDefault();
-    const newAvisoData = {
+  const addAviso = (title, content) => {
+    const newAviso = {
       id: avisos.length + 1,
-      title: newAvisoTitle,
-      content: newAvisoContent
+      title,
+      content,
     };
-    setAvisos([...avisos, newAvisoData]);
-    setNewAvisoTitle('');
-    setNewAvisoContent('');
-
-    // Envie a requisição para criar o aviso no backend, se necessário
+    setAvisos([...avisos, newAviso]);
   };
 
-  const handleNewArquivoSubmit = (e) => {
-    e.preventDefault();
-    const newArquivoData = {
+  const addArquivo = (name, url) => {
+    const newArquivo = {
       id: arquivos.length + 1,
-      name: newArquivoName,
-      url: newArquivoUrl
+      name,
+      url,
     };
-    setArquivos([...arquivos, newArquivoData]);
-    setNewArquivoName('');
-    setNewArquivoUrl('');
-
-    // Envie a requisição para criar o arquivo no backend, se necessário
+    setArquivos([...arquivos, newArquivo]);
   };
-
 
   if (!community) {
-    return <div>Carregando...</div>;
+    return <div>Comunidade não encontrada</div>;
   }
 
   const { name, image, members } = community;
@@ -118,146 +54,199 @@ const CommunityPage = () => {
     setIsExpanded(!isExpanded);
   };
 
-
   return (
     <div className="community-page">
       <div className="community">
         <img
-          src="/assets/images/logo-voltar.png"
+          src={logo}
           alt="Voltar"
           className="community-back-button"
           onClick={() => navigate('/')}
         />
-        <div className="community-buttons">
-          <button onClick={() => navigate(`/${communityId}/Avisos`)}>Avisos</button>
-          <button onClick={() => navigate(`/${communityId}/Geral`)}>Geral</button>
-          <button onClick={() => navigate(`/${communityId}/Arquivos`)}>Arquivos</button>
-
-        </div>
-        <img
-          src="/assets/images/perfil.png"
-          alt="Usuário"
-          className="community-user-button"
-          onClick={() => navigate('/user')}
-        />
+      
+      <div className="community-buttons">
+        <button onClick={() => navigate(`/${communityId}/Avisos`)}>Avisos</button>
+        <button onClick={() => navigate(`/${communityId}/Geral`)}>Geral</button>
+        <button onClick={() => navigate(`/${communityId}/Arquivos`)}>Arquivos</button>
       </div>
-        <div className="sidebar">
-          <div className="community-info">
-            <img src={image} alt={''} className="community-image" />
-            <h2 className="community-name">{name}</h2>
-            <p className="community-members">{members.length} membros</p>
-          </div>
-          <div>
-          <button className={`minimize-button ${isExpanded ? 'open' : 'closed'}`} onClick={toggleList}></button>
-      {isExpanded && (
-        <div className="member-list">
-          {members.map((member) => (
-            <div key={member.username} className="member">
-              <img src={member.image} alt={member.username} className="member-avatar" />
-              <p className="member-name">{member.username}</p> 
+      <img
+        src={logoUser} alt="Logo"
+        className="community-user-button"
+        onClick={() => navigate('/user')}
+      />
+      </div>
+      <div className="sidebar">
+        <div className="community-info">
+          <img src={image} alt="" className="community-image" />
+          <h2 className="community-name">{name}</h2>
+          <p className="community-members">{members.length} membros</p>
+        </div>
+        <div>
+          <button
+            className={`minimize-button ${isExpanded ? 'open' : 'closed'}`}
+            onClick={toggleList}
+          />
+          {isExpanded && (
+            <div className="member-list">
+              {members.map((member) => (
+                <div key={member.username} className="member">
+                  <img src={member.image} alt={member.username} className="member-avatar" />
+                  <p className="member-name">{member.username}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      )}
-    </div>
-
       </div>
-      <div className="main-content">
+      <div className="sidebar2"></div>
+      <div className="community-content">
         <Routes>
-          <Route path="/:communityId/Avisos" element={<Avisos avisos={avisos} onNewAvisoSubmit={handleNewAvisoSubmit} newAvisoTitle={newAvisoTitle} setNewAvisoTitle={setNewAvisoTitle} newAvisoContent={newAvisoContent} setNewAvisoContent={setNewAvisoContent} />} />
-          <Route path="/:communityId/Geral" element={<Geral posts={posts} onNewPostSubmit={handleNewPostSubmit} newPost={newPost} setNewPost={setNewPost} />} />
-          <Route path="/:communityId/Arquivos" element={<Arquivos arquivos={arquivos} onNewArquivoSubmit={handleNewArquivoSubmit} newArquivoName={newArquivoName} setNewArquivoName={setNewArquivoName} newArquivoUrl={newArquivoUrl} setNewArquivoUrl={setNewArquivoUrl} />} />
+          <Route
+            path="geral"
+            element={
+              <div>
+                {posts.map((post) => (
+                  <div key={post.id} className="post">
+                    <h2>{post.username}</h2>
+                    <p>{post.mensagem}</p>
+                    <p>{new Date(post.data_hora).toLocaleString()}</p>
+                  </div>
+                ))}
+                <h3>Criar novo post</h3>
+                <PostForm onAddPost={addPost} />
+              </div>
+            }
+          />
+          <Route
+            path="avisos"
+            element={
+              <div>
+                {avisos.map((aviso) => (
+                  <div key={aviso.id} className="aviso">
+                    <h2>{aviso.title}</h2>
+                    <p>{aviso.content}</p>
+                  </div>
+                ))}
+                <h3>Criar novo aviso</h3>
+                <AvisoForm onAddAviso={addAviso} />
+              </div>
+            }
+          />
+          <Route
+            path="arquivos"
+            element={
+              <div>
+                {arquivos.map((arquivo) => (
+                  <div key={arquivo.id} className="arquivo">
+                    <h2>{arquivo.name}</h2>
+                    <a href={arquivo.url} target="_blank" rel="noopener noreferrer">
+                      Download
+                    </a>
+                  </div>
+                ))}
+                <h3>Carregar novo arquivo</h3>
+                <ArquivoForm onAddArquivo={addArquivo} />
+              </div>
+            }
+          />
         </Routes>
       </div>
     </div>
   );
 };
-const Avisos = ({ avisos, onNewAvisoSubmit, newAvisoTitle, setNewAvisoTitle, newAvisoContent, setNewAvisoContent }) => {
+
+const PostForm = ({ onAddPost }) => {
+  const [username, setUsername] = useState('');
+  const [mensagem, setMensagem] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddPost(username, mensagem);
+    setUsername('');
+    setMensagem('');
+  };
+
   return (
-    <div className="avisos">
-      <h2>Avisos</h2>
-      {avisos.map((aviso) => (
-        <div key={aviso.id} className="aviso">
-          <h3>{aviso.title}</h3>
-          <p>{aviso.content}</p>
-        </div>
-      ))}
-      <form onSubmit={onNewAvisoSubmit}>
-        <input
-          type="text"
-          placeholder="Título do aviso"
-          value={newAvisoTitle}
-          onChange={(e) => setNewAvisoTitle(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Conteúdo do aviso"
-          value={newAvisoContent}
-          onChange={(e) => setNewAvisoContent(e.target.value)}
-          required
-        />
-        <button type="submit">Criar Aviso</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Seu nome de usuário"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <textarea
+        placeholder="Sua mensagem"
+        value={mensagem}
+        onChange={(e) => setMensagem(e.target.value)}
+        required
+      />
+      <button type="submit">Adicionar Post</button>
+    </form>
   );
 };
 
-const Geral = ({ posts, onNewPostSubmit, newPost, setNewPost }) => {
+const AvisoForm = ({ onAddAviso }) => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddAviso(title, content);
+    setTitle('');
+    setContent('');
+  };
+
   return (
-    <div className="post-list">
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
-      <form onSubmit={onNewPostSubmit}>
-        <textarea
-          placeholder="Escreva uma nova postagem"
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
-          required
-        />
-        <button type="submit">Criar Postagem</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Título do aviso"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <textarea
+        placeholder="Conteúdo do aviso"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        required
+      />
+      <button type="submit">Adicionar Aviso</button>
+    </form>
   );
 };
 
-const Arquivos = ({ arquivos, onNewArquivoSubmit, newArquivoName, setNewArquivoName, newArquivoUrl, setNewArquivoUrl }) => {
+const ArquivoForm = ({ onAddArquivo }) => {
+  const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddArquivo(name, url);
+    setName('');
+    setUrl('');
+  };
+
   return (
-    <div className="arquivos">
-      <h2>Arquivos</h2>
-      {arquivos.map((arquivo) => (
-        <div key={arquivo.id} className="arquivo">
-          <a href={arquivo.url} target="_blank" rel="noopener noreferrer">{arquivo.name}</a>
-        </div>
-      ))}
-      <form onSubmit={onNewArquivoSubmit}>
-        <input
-          type="text"
-          placeholder="Nome do arquivo"
-          value={newArquivoName}
-          onChange={(e) => setNewArquivoName(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="URL do arquivo"
-          value={newArquivoUrl}
-          onChange={(e) => setNewArquivoUrl(e.target.value)}
-          required
-        />
-        <button type="submit">Criar Arquivo</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Nome do arquivo"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="URL do arquivo"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        required
+      />
+      <button type="submit">Carregar Arquivo</button>
+    </form>
   );
 };
-
-const Post = ({ post }) => (
-  <div className="post">
-    <p className="post-author">{post.username}</p>
-    <p className="post-content">{post.mensagem}</p>
-    <p className="post-date">{new Date(post.data_hora).toLocaleString()}</p>
-    <button className="reply-button">Responder</button>
-  </div>
-);
 
 export default CommunityPage;
