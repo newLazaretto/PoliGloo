@@ -15,6 +15,7 @@ const CommunityPage = () => {
   const [newAvisoContent, setNewAvisoContent] = useState('');
   const [newArquivoName, setNewArquivoName] = useState('');
   const [newArquivoUrl, setNewArquivoUrl] = useState('');
+  const [isExpanded, setIsExpanded] = useState(true);
 
   /*
   useEffect(() => {
@@ -113,6 +114,11 @@ const CommunityPage = () => {
 
   const { name, image, members } = community;
 
+  const toggleList = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+
   return (
     <div className="community-page">
       <div className="community">
@@ -135,20 +141,26 @@ const CommunityPage = () => {
           onClick={() => navigate('/user')}
         />
       </div>
-      <div className="sidebar">
-        <div className="community-info">
-          <img src={image} alt={''} className="community-image" />
-          <h2 className="community-name">{name}</h2>
-          <p className="community-members">{members.length} membros</p>
-        </div>
+        <div className="sidebar">
+          <div className="community-info">
+            <img src={image} alt={''} className="community-image" />
+            <h2 className="community-name">{name}</h2>
+            <p className="community-members">{members.length} membros</p>
+          </div>
+          <div>
+          <button className={`minimize-button ${isExpanded ? 'open' : 'closed'}`} onClick={toggleList}></button>
+      {isExpanded && (
         <div className="member-list">
           {members.map((member) => (
             <div key={member.username} className="member">
-              <img src="/assets/images/perfil.png" alt={member.username} className="member-avatar" />
-              <p className="member-name">{member.username}</p>
+              <img src={member.image} alt={member.username} className="member-avatar" />
+              <p className="member-name">{member.username}</p> 
             </div>
           ))}
         </div>
+      )}
+    </div>
+
       </div>
       <div className="main-content">
         <Routes>

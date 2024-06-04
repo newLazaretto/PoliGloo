@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import '../assets/styles/Navbar.css';
 import backLogo from '../assets/images/logo-voltar.png';
 import userLogo from '../assets/images/perfil.png';
-import sampleImage from '../assets/images/logo3.png'; // Substitua pelo caminho da sua imagem
-import brickWallImage from '../assets/images/brick-wall.png'; // Substitua pelo caminho da sua imagem de fundo
+import sampleImage from '../assets/images/logo3.png'; 
+import brickWallImage from '../assets/images/brick-wall.png'; 
 
 function Navbar({ toggleSection }) {
   const [isImageVisible, setImageVisible] = useState(false);
