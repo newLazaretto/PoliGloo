@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
 .communities {
-  margin-top: 90px;
+  margin-top: 91px;
   padding-left: 19.7px;
   padding-right: 19.7px;
   margin-left: 15.97%;
@@ -13,6 +13,8 @@
   flex-direction: column;
   background-color: transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  
 }
 
 .vertical-line {
@@ -21,6 +23,7 @@
   bottom: 0;
   width: 1px; 
   background-color: #939DCE;
+
 }
 
 .left-line {
