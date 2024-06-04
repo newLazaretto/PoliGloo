@@ -2,18 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
-
-body.login-page {
-    font-family: 'Poppins', sans-serif;
-    background-color: #F4F6F9;
+.login-page {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    justify-content: center; 
+    flex-direction: column; 
 }
 
 .login-page .form-container {
+    align-items: center;
     background: #FAFAFC;
     padding: 2rem;
     border-radius: 10px;

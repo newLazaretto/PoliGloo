@@ -7,7 +7,7 @@ const CommunityData = {
   Avisos: {
     name: 'Avisos',
     creator: 'admin',
-    members: [{ username: 'user1' }, { username: 'user2' }, { username: 'user3' }, { username: 'user4' }],
+    members: [{ username: 'Monalisa' }, { username: 'Leonardo' }, { username: 'Gabriel' }, { username: 'Igor' }],
     posts: [
       { id: 1, username: 'user1', mensagem: 'Primeiro post de exemplo', data_hora: new Date().toISOString() },
       { id: 2, username: 'user2', mensagem: 'Segundo post de exemplo', data_hora: new Date().toISOString() }
@@ -25,16 +25,16 @@ const CommunityData = {
   Compiladores: {
     name: 'Compiladores',
     creator: 'admin',
-    members: [{ username: 'user3' }, { username: 'user4' }],
+    members: [{ username: 'Gabriel' }, { username: 'Igor' }],
     posts: [],
     avisos: [],
     arquivos: [],
     image: community2Image
   },
   RedesNeurais: {
-    name: 'Redes Neurais',
+    name: 'Redes de Computadores',
     creator: 'admin',
-    members: [{ username: 'user5' }, { username: 'user6' }],
+    members: [{ username: 'Hemir' }, { username: 'Edison' }],
     posts: [],
     avisos: [],
     arquivos: [],

@@ -92,7 +92,6 @@
 }
 
 .community-image {
-  width: 100px;
   height: 100px;
   border-radius: 50%;
   margin-bottom: 10px;
@@ -103,10 +102,6 @@
   margin-bottom: 5px;
 }
 
-.community-members {
-  font-size: 1em;
-  color: #666;
-}
 
 .member-list {
   margin-top: 20px;
