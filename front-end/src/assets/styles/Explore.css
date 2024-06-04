@@ -101,3 +101,29 @@ a{
   margin-left: 15%;
   
 }
+.search-button  {
+  background-color: #2e74e5;
+  color: white;
+  border: none;
+  padding: 0.3%;
+  width: 2%;
+  margin-left: 20%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.3em;
+  
+  top: 11%;
+  position: absolute;
+  
+  
+}
+.star{
+  padding-bottom: 2.5%;
+  
+}
+.favorite-community img{
+  width: 30%;
+  height: 80px;
+  margin-right: 10px;
+  
+}
