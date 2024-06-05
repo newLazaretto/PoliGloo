@@ -40,7 +40,7 @@ const Communities = () => {
               <img className="communities-iglu" src={CommunityData[communityId].image} alt={CommunityData[communityId].name} />
               <div className="button-background">
                 <span className="communities-text">{CommunityData[communityId].name}</span>
-                <span className="members-text">{getMembersMessage(CommunityData[communityId].members.map(member => member.username))}</span>
+                <b><span className="members-text">{getMembersMessage(CommunityData[communityId].members.map(member => member.username))}</span></b>
               </div>
             </button>
             <button
