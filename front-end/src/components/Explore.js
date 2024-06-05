@@ -1,23 +1,32 @@
 // src/components/Explore.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CommunityData from './communityData';
 import '../assets/styles/Explore.css';
+import { FaSearch } from "react-icons/fa";
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCommunities, setFilteredCommunities] = useState([]);
 
-  const filteredCommunities  = Object.keys(CommunityData)
-    .filter((communityId) =>
-      CommunityData[communityId].name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => CommunityData[b].members.length - CommunityData[a].members.length);
+  useEffect(() => {
+    setFilteredCommunities(Object.keys(CommunityData)
+      .sort((a, b) => CommunityData[b].members.length - CommunityData[a].members.length));
+  }, []);
+
+  const handleSearch = () => {
+    const filtered = Object.keys(CommunityData)
+      .filter((communityId) =>
+        CommunityData[communityId].name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) => CommunityData[b].members.length - CommunityData[a].members.length);
+
+    setFilteredCommunities(filtered);
+  };
 
   const favoriteCommunityId = Object.keys(CommunityData)
     .sort((a, b) => CommunityData[b].members.length - CommunityData[a].members.length)[0];
   const favoriteCommunity = favoriteCommunityId && CommunityData[favoriteCommunityId];
-  
-  
 
   const recentPosts = Object.values(CommunityData)
     .flatMap(community => community.posts)
@@ -33,15 +42,18 @@ const Explore = () => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Buscar comunidades..."
+          placeholder="Buscar comunidades..." 
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <button className="search-button" onClick={handleSearch}>
+          <FaSearch />
+        </button>
       </div>
 
       {favoriteCommunity && (
         <div className="favorite-community">
-          <h2>Iglu mais aconchegante <span role="img" aria-label="star">⭐</span></h2>
+          <h2>Iglu mais aconchegante <span className="star" role="img" aria-label="star">⭐</span></h2>
           <div className="community-details">
             <img src={favoriteCommunity.image} alt={favoriteCommunity.name} />
             <div>
@@ -52,6 +64,7 @@ const Explore = () => {
           </div>
         </div>
       )}
+
       <div className="community-list">
         <h2>Comunidades</h2>
         <ul>
@@ -66,6 +79,7 @@ const Explore = () => {
           ))}
         </ul>
       </div>
+
       <div className="recent-posts">
         <h2>Posts Recentes</h2>
         <ul>
@@ -81,6 +95,7 @@ const Explore = () => {
           ))}
         </ul>
       </div>
+
       <div className="recent-avisos">
         <h2>Avisos Recentes</h2>
         <ul>
